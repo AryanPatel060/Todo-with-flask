@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block body %}
+      <div class="container my-3" style="width:700px;">
+        <h1>Add Todo</h1>  
+    </div>
+      <div class="container my-5" style="width:700px;">
+        <form action="/" method="post">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="desc" class="form-label">Desc</label>
+              <input type="textarea" class="form-control" name="desc" id="desc">
+            </div>
+          
+            <button type="submit" class="btn btn-primary">Add Todo</button>
+          </form>
+      </div>
+      
+      <div class="container" style="width:700px;"><h1>Todos</h1></div>
+      {% if alltodo|length == 0 %}
+      <div class="container alert alert-dark" role="alert" style="width:700px;">
+        No recored found
+      </div>
+        {% else %}
+      <div class="container my-5" style="width:700px;">
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Sno</th>
+                <th scope="col">Title</th>
+                <th scope="col">Desc</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for todo in alltodo %}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td style="width:200px;">{{todo.title}}</td>
+                <td style="width:200px;">{{todo.desc}}</td>
+                <td><a href="/edit/{{todo.sno}}" type="submit" class="btn mx-3 btn-success btn-sm">Edit</a><a href="/delete/{{todo.sno}}" type="submit" class="btn btn-danger btn-sm">Delete</a></td>
+              </tr>
+              {% endfor %}
+              {% endif %}
+            </tbody>
+          </table>
+      </div>
+      {% endblock body %}
+      
